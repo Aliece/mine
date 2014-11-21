@@ -139,9 +139,9 @@ public class MineServer {
 				/ system.getProcessorBufferChunk();
 		LOGGER.info(inf);
 		LOGGER.info("sysconfig params:" + system.toString());
-//		timer.schedule(updateTime(), 0L, TIME_UPDATE_PERIOD);
-//
-//		timer.schedule(processorCheck(), 0L, system.getProcessorCheckPeriod());
+		timer.schedule(updateTime(), 0L, TIME_UPDATE_PERIOD);
+
+		timer.schedule(processorCheck(), 0L, system.getProcessorCheckPeriod());
 
 		// startup server
 		ServerConnectionFactory sf = new ServerConnectionFactory();

@@ -86,6 +86,7 @@ public class AIOConnection extends AbstractConnection {
 		return "Connection [id=" + id + ", host=" + host + ", port="
 				+ port + ", localPort=" + localPort + "]";
 	}
+	
 
 	@Override
 	public void error(int errCode, Throwable t) {

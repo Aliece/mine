@@ -204,7 +204,6 @@ public abstract class AbstractConnection implements NIOConnection {
 	}
 
 	public void asynRead() {
-
 		ByteBuffer theBuffer = readBuffer;
 		if (theBuffer == null) {
 			theBuffer = processor.getBufferPool().allocate();
