@@ -116,9 +116,6 @@ public class NIOConnector implements CompletionHandler<Void, AbstractConnection>
 		return processors[inx];
 	}
 
-	/**
-	 * 后端连接ID生成器
-	 */
 	private static class ConnectIdGenerator {
 
 		private static final long MAX_VALUE = Long.MAX_VALUE;

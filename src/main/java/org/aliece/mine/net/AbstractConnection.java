@@ -198,11 +198,6 @@ public abstract class AbstractConnection implements NIOConnection {
 		}
 	}
 
-	@Override
-	public void register() throws IOException {
-
-	}
-
 	public void asynRead() {
 		ByteBuffer theBuffer = readBuffer;
 		if (theBuffer == null) {
@@ -234,7 +229,6 @@ public abstract class AbstractConnection implements NIOConnection {
 		netInBytes += got;
 		processor.addNetInBytes(got);
 
-		// 澶勭悊鏁版嵁
 		int offset = readBufferOffset, length = 0, position = buffer.position();
 		for (;;) {
 			length = getPacketLength(buffer, offset);
@@ -370,18 +364,18 @@ public abstract class AbstractConnection implements NIOConnection {
 	public abstract void onConnectFailed(Throwable e);
 
 	/**
-	 * 娓呯悊閬楃暀璧勬簮
-	 */
+     * 清理遗留资源
+     */
 	protected void cleanup() {
 
-		// 鍥炴敹鎺ユ敹缂撳瓨
+		 // 回收接收缓存
 		if (readBuffer != null) {
 			recycle(readBuffer);
 			this.readBuffer = null;
 			this.readBufferOffset = 0;
 		}
 
-		// 鍥炴敹鍙戦�缂撳瓨
+		 // 回收发送缓存
 		if (writeQueue != null) {
 			ByteBuffer buffer = null;
 			while ((writeQueue != null) && (buffer = writeQueue.poll()) != null) {

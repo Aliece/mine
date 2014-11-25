@@ -8,7 +8,7 @@ import java.nio.channels.AsynchronousSocketChannel;
 import org.aliece.mine.utils.CharsetUtil;
 import org.apache.log4j.Logger;
 
-public class Connection extends AbstractConnection {
+public abstract class Connection extends AbstractConnection {
 	private static final Logger logger = Logger.getLogger(Connection.class);
 
 	protected long id;
@@ -19,7 +19,7 @@ public class Connection extends AbstractConnection {
 	protected String charset;
 	protected int charsetIndex;
 	protected boolean isFinishConnect;
-	protected byte[] seed;
+	protected byte[] seed;//√‹¬Îº”√‹÷÷◊”
 
 	protected boolean isAccepted;
 
@@ -72,6 +72,46 @@ public class Connection extends AbstractConnection {
 
 	public void setProcessor(NIOProcessor processor) {
 		super.setProcessor(processor);
+	}
+
+	public byte[] getSeed() {
+		return seed;
+	}
+
+	public void setSeed(byte[] seed) {
+		this.seed = seed;
+	}
+
+	public long getIdleTimeout() {
+		return idleTimeout;
+	}
+
+	public void setIdleTimeout(long idleTimeout) {
+		this.idleTimeout = idleTimeout;
+	}
+
+	public int getCharsetIndex() {
+		return charsetIndex;
+	}
+
+	public void setCharsetIndex(int charsetIndex) {
+		this.charsetIndex = charsetIndex;
+	}
+
+	public boolean isFinishConnect() {
+		return isFinishConnect;
+	}
+
+	public void setFinishConnect(boolean isFinishConnect) {
+		this.isFinishConnect = isFinishConnect;
+	}
+
+	public String getCharset() {
+		return charset;
+	}
+
+	public boolean isAccepted() {
+		return isAccepted;
 	}
 
 	public boolean setCharset(String charset) {

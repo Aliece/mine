@@ -10,6 +10,7 @@ import java.nio.channels.CompletionHandler;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.aliece.mine.net.factory.ConnectionFactory;
+import org.aliece.mine.server.ServerConnection;
 import org.apache.log4j.Logger;
 
 public class NIOAcceptor implements
@@ -33,7 +34,6 @@ public class NIOAcceptor implements
 		this.port = port;
 		this.factory = factory;
 		serverChannel = AsynchronousServerSocketChannel.open(group);
-		/** 设置TCP属性 */
 		serverChannel.setOption(StandardSocketOptions.SO_REUSEADDR, true);
 		serverChannel.setOption(StandardSocketOptions.SO_RCVBUF, 16 * 1024);
 		// backlog=100
@@ -62,10 +62,7 @@ public class NIOAcceptor implements
 
 	private void accept(AsynchronousSocketChannel channel, Long id) {
 		try {
-			System.out.println("有客户端连接:"
-					+ channel.getRemoteAddress().toString());
-
-			Connection c = factory.make(channel);
+			ServerConnection c = factory.make(channel);
 			c.setAccepted(true);
 			c.setId(id);
 			NIOProcessor processor = nextProcessor();
@@ -121,9 +118,6 @@ public class NIOAcceptor implements
 		}
 	}
 
-	/**
-	 * 前端连接ID生成器
-	 */
 	private static class AcceptIdGenerator {
 
 		private static final long MAX_VALUE = 0xffffffffL;

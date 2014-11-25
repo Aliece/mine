@@ -5,7 +5,7 @@ import java.net.StandardSocketOptions;
 import java.nio.channels.AsynchronousSocketChannel;
 
 import org.aliece.mine.buffer.BufferQueue;
-import org.aliece.mine.net.Connection;
+import org.aliece.mine.server.ServerConnection;
 
 public abstract class ConnectionFactory {
 
@@ -17,17 +17,17 @@ public abstract class ConnectionFactory {
 	protected long idleTimeout = 8 * 3600 * 1000L;
 	protected String charset = "utf8";
 
-	protected abstract Connection getConnection(
+	protected abstract ServerConnection getConnection(
 			AsynchronousSocketChannel channel) throws IOException;
 
-	public Connection make(AsynchronousSocketChannel channel)
+	public ServerConnection make(AsynchronousSocketChannel channel)
 			throws IOException {
 		channel.setOption(StandardSocketOptions.SO_RCVBUF, socketRecvBuffer);
 		channel.setOption(StandardSocketOptions.SO_SNDBUF, socketSendBuffer);
 		channel.setOption(StandardSocketOptions.TCP_NODELAY, true);
 		channel.setOption(StandardSocketOptions.SO_KEEPALIVE, true);
 
-		Connection c = getConnection(channel);
+		ServerConnection c = getConnection(channel);
 		c.setPacketHeaderSize(packetHeaderSize);
 		c.setMaxPacketSize(maxPacketSize);
 		c.setWriteQueue(new BufferQueue(writeQueueCapcity));

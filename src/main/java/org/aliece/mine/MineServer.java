@@ -118,9 +118,10 @@ public class MineServer {
 	}
 
 	public void beforeStart() {
-		String home = SystemConfig.getHomePath();
-		Log4jInitializer.configureAndWatch(home + "/conf/log4j.xml",
-				LOG_WATCH_DELAY);
+		// String home = SystemConfig.getHomePath();
+		// Log4jInitializer.configureAndWatch(home + "/conf/log4j.xml",
+		// LOG_WATCH_DELAY);
+		Log4jInitializer.configureAndWatch(MineServer.class.getClassLoader().getResource("").getPath() + "/conf/log4j.xml", LOG_WATCH_DELAY);
 	}
 
 	public void startup() throws IOException {

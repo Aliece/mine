@@ -85,13 +85,10 @@ public class NIOProcessor {
 
 		while (it.hasNext()) {
 			AbstractConnection c = it.next().getValue();
-			// 删除空连接
 			if (c == null) {
 				it.remove();
 				continue;
 			}
-
-			// 清理已关闭连接，否则空闲检查。
 			if (c.isClosed()) {
 				c.cleanup();
 				it.remove();

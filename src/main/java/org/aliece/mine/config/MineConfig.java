@@ -10,6 +10,9 @@ public class MineConfig {
 
 	private static final int RELOAD = 1;
 	private static final int ROLLBACK = 2;
+	public static final String USERNAME = "test";
+	public static final String PASSWORD = "test";
+	public static final String DBNAME = "dbtest";
 
 	private volatile SystemConfig system;
 	private long reloadTime;
