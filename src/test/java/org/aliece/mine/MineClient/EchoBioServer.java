@@ -52,6 +52,8 @@ public class EchoBioServer implements Runnable {
                 output.flush();
                 while (true) {
                     int got = input.read(readBuffer);
+                    System.out.println(new String(readBuffer));
+                    System.out.println(new String(writeBuffer));
                     output.write(writeBuffer, 0, got);
                     // output.flush();
                 }
@@ -70,7 +72,7 @@ public class EchoBioServer implements Runnable {
     }
 
     public static void main(String[] args) throws Exception {
-        new Thread(new EchoBioServer(8066)).start();
+        new Thread(new EchoBioServer(7878)).start();
     }
 
 
